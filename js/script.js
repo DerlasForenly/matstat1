@@ -1,9 +1,22 @@
 calculate_t1.onclick = () => {
-    let result = [
-        [1, 7, 5, 6, 1],
-        [3, 2, 1, 2, 3],
-        [4, 5, 7, 2, 2]
-    ]
+    let sample = []
+    let result = []
+    let fre = []
+
+    for (let i = 0; i < samples.length; i++) {
+        sample = sum(sample, samples[i].value.split(' '))
+    }
+    for (let i = 0; i < sample.length; i++) {
+        sample[i] = sample[i].replace(',', '.')
+        sample[i] = parseFloat(sample[i])
+    }
+
+    console.log(sample)
+
+
+    fre = count(sample)
+    console.log(fre)
+
     
     render_result_t1(result)
 }
