@@ -1,0 +1,47 @@
+#result_div {
+    display: flex;
+    flex-flow: column;
+}
+
+.input {
+    display: flex;
+    flex-flow: column;
+    padding: 5px;
+    width: auto;
+    margin: 10px;
+}
+
+.sample_input {
+    padding: 5px;
+    font-size: 10px;
+    width: 800px;
+}
+
+#amount_of_samples {
+    width: 60px;
+}
+
+label {
+    margin: 5px;
+}
+
+.calculate {
+    margin: 5px;
+    width: 80px;
+}
+
+.input_row {
+    width: auto;
+    margin: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 5px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+    font-weight: lighter;
+}
