@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Sets</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <fieldset class="input">
         <legend>Sets</legend>
-        <label>Refresh the page to get default values</label>
         <label>Enter sample items separated by spaces:</label>
 
         <div class="input_row">
@@ -17,13 +17,18 @@
         </div>
 
         <div id="samples_div"></div>
+        <div class="input_row">
+            <button class="calculate" id="clear_all">Crear all</button>
+            <button class="calculate" id="set_default">Set default</button>
+        </div>
+        
     </fieldset>
 
     <fieldset class="input">
         <legend>Task 1</legend>
         <button class="calculate" id="calculate_t1">Calculate</button>
 
-        <div id="result_div_t1">
+        <div id="result_div_t1" class="result_div">
 
         </div>
     </fieldset>
@@ -32,7 +37,7 @@
         <legend>Task 2</legend>
         <button class="calculate" id="calculate_t2">Calculate</button>
 
-        <div id="result_div_t2">
+        <div id="result_div_t2" class="result_div">
 
         </div>
     </fieldset>
@@ -41,7 +46,7 @@
         <legend>Task 3</legend>
         <button class="calculate" id="calculate_t3">Calculate</button>
 
-        <div id="result_div_t3">
+        <div id="result_div_t3" class="result_div">
 
         </div>
     </fieldset>
@@ -50,7 +55,7 @@
         <legend>Task 4</legend>
         <button class="calculate" id="calculate_t4">Calculate</button>
 
-        <div id="result_div_t4">
+        <div id="result_div_t4" class="result_div">
 
         </div>
     </fieldset>
@@ -59,7 +64,7 @@
         <legend>Task 5</legend>
         <button class="calculate" id="calculate_t5">Calculate</button>
 
-        <div id="result_div_t5">
+        <div id="result_div_t5" class="result_div">
 
         </div>
     </fieldset>

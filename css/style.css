@@ -1,4 +1,4 @@
-#result_div {
+.result_div {
     display: flex;
     flex-flow: column;
 }
@@ -25,6 +25,10 @@ label {
     margin: 5px;
 }
 
+.bold_label {
+    font-weight: bold;
+}
+
 .calculate {
     margin: 5px;
     width: 80px;
@@ -45,4 +49,8 @@ th, td {
     border: 1px solid black;
     padding: 5px;
     font-weight: lighter;
+}
+
+canvas {
+    margin: 5px
 }

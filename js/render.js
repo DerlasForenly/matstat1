@@ -39,6 +39,7 @@ function deleteChilds(element) {
 }
 
 function start_render() {
+    deleteChilds(samples_div)
     for (let i = 0; i < amount_of_samples.value; i++) {
         let div = document.createElement('div')
         div.setAttribute('class', "input_row")
