@@ -37,6 +37,9 @@ label {
 .input_row {
     width: auto;
     margin: 5px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
 }
 
 table {
@@ -49,6 +52,13 @@ th, td {
     border: 1px solid black;
     padding: 5px;
     font-weight: lighter;
+}
+
+.td_bnone {
+    padding: 5px;
+    font-weight: lighter;
+    border: none;
+    text-align: left;
 }
 
 canvas {

@@ -54,9 +54,50 @@ calculate_t2.onclick = () => {
     label.textContent = "Empirical distribution function:"
     result_div_t2.appendChild(label)
 
+
+    let div = document.createElement('div')
+    div.setAttribute('class', 'input_row')
+
     label = document.createElement('label')
-    label.textContent = "F*(x) = {}"
-    result_div_t2.appendChild(label)
+    label.textContent = "F*(x) = "
+    let table = document.createElement('table')
+    
+
+    for (let i = 0; i < labels.length; i++) {
+        let tr = document.createElement('tr')
+
+        let td = document.createElement('td')
+        td.setAttribute('class', 'td_bnone')
+        td.textContent = data2[i] + ","
+        tr.appendChild(td)
+
+        if (i === 0) {
+            td = document.createElement('td')
+            td.setAttribute('class', 'td_bnone')
+            td.textContent = `x <= ${data2[i]}`
+            tr.appendChild(td)
+        }
+        else if (i === labels.length - 1) {
+            td = document.createElement('td')
+            td.setAttribute('class', 'td_bnone')
+            td.textContent = `x <= ${data2[i]}`
+            tr.appendChild(td)
+        }
+        else {
+            td = document.createElement('td')
+            td.setAttribute('class', 'td_bnone')
+            td.textContent = `${data2[i - 1]} < x <= ${data2[i]}`
+            tr.appendChild(td)
+        }
+
+        table.appendChild(tr)
+    }
+
+    div.appendChild(label)
+    div.appendChild(table)
+    result_div_t2.appendChild(div)
+
+    
 
     label = document.createElement('label')
     label.setAttribute('class', 'bold_label')
