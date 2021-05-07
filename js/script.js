@@ -2,6 +2,8 @@ calculate_t1.onclick = () => {
     let sample = []
     let result = []
     let fre = []
+    let rel = []
+    let s = 0
 
     for (let i = 0; i < samples.length; i++) {
         sample = sum(sample, samples[i].value.split(' '))
@@ -11,12 +13,28 @@ calculate_t1.onclick = () => {
         sample[i] = parseFloat(sample[i])
     }
 
-    console.log(sample)
-
-
     fre = count(sample)
-    console.log(fre)
+    s = sample.length
+    sample = deleteDoubles(sample)
+    sample.sort((a ,b) => a - b)
 
+    for (let i = 0; i < sample.length; i++) {
+        rel.push((Math.round(fre[sample[i]] / s * 100 * 10000) / 10000))
+        result.push([])
+        result[i].push(sample[i])
+        result[i].push(fre[sample[i]])
+        let accf = 0
+        for (let j = i; j >= 0; j--) {
+            accf += fre[sample[j]]
+        }
+        result[i].push(accf)
+        result[i].push(rel[i] + "%")
+        let arf = 0
+        for (let j = i; j >= 0; j--) {
+            arf += rel[j]
+        }
+        result[i].push(Math.round(arf * 100) / 100)
+    }
     
     render_result_t1(result)
 }

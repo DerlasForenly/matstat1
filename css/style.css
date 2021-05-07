@@ -38,6 +38,7 @@ label {
 table {
     border-collapse: collapse;
     margin: 5px;
+    text-align: center;
 }
 
 th, td {
