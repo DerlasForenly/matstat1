@@ -74,19 +74,19 @@ calculate_t2.onclick = () => {
         if (i === 0) {
             td = document.createElement('td')
             td.setAttribute('class', 'td_bnone')
-            td.textContent = `x <= ${data2[i]}`
+            td.textContent = `x <= ${labels[i]}`
             tr.appendChild(td)
         }
         else if (i === labels.length - 1) {
             td = document.createElement('td')
             td.setAttribute('class', 'td_bnone')
-            td.textContent = `x <= ${data2[i]}`
+            td.textContent = `x <= ${labels[i]}`
             tr.appendChild(td)
         }
         else {
             td = document.createElement('td')
             td.setAttribute('class', 'td_bnone')
-            td.textContent = `${data2[i - 1]} < x <= ${data2[i]}`
+            td.textContent = `${labels[i - 1]} < x <= ${labels[i]}`
             tr.appendChild(td)
         }
 
@@ -125,8 +125,21 @@ calculate_t2.onclick = () => {
 }
 
 calculate_t3.onclick = () => {
-    let result
+    let data = calculations_for_t1()
 
+    let result = {
+        median: 0,
+        mode: 0,
+        sample_mean: 0,
+        sample_variance: 0,
+        standart_derivation: 0,
+        coefficient_of_variation: 0,
+        central_moments: 0,
+        asymmetry: 0,
+        excess: 0,
+        variance_fixed: 0,
+        corrected_standard_deviation: 0
+    }
     
     render_result_t3(result)
 }

@@ -38,7 +38,20 @@ function render_result_t2(result) {
 }
 
 function render_result_t3(result) {
-    
+    deleteChilds(result_div_t3)
+
+    let label = document.createElement('label')
+    label.textContent = "Sample mean: " + result['sample_mean']
+    result_div_t3.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Mode: " + result['mode']
+    result_div_t3.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Median: " + result['median']
+    result_div_t3.appendChild(label)
+
 }
 
 function render_result_t4(result) {
