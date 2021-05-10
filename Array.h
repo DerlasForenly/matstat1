@@ -3,6 +3,7 @@
 #include <vector>
 using namespace std;
 
+/* Замінив усі ptr на elements адже це більше не вказівники */
 template <typename T>
 class Array {
 	friend ostream &operator<< (ostream &output, const Array<T>& obj) {
@@ -10,11 +11,13 @@ class Array {
 			output << obj.elements[ix] << endl;
 		return output;
 	}
+	/* замість вказівника тепер вектор, у вектора є своя інддексація */
 	vector<T> elements;
 	int size;
 	int first;
 	int last;
 public:
+	/* Функції ту ж самі, змінював їх зміст частково */ 
 	Array();
 	Array(int, int, int);
 	Array(const Array&);
@@ -30,6 +33,7 @@ public:
 
 template <typename T>
 Array<T>::Array() {
+	/* Тепер не треба робити пустим вказівник */
 	size = 0;
 	first = 0;
 	last = 0;
@@ -41,6 +45,7 @@ Array<T>::Array(int arraySize, int first, int last) {
 	this->first = first;
 	this->last = last;
 
+	/* Замість виділення пам'яті можна змінити його розмір */
 	elements.resize(arraySize);
 }
 
@@ -48,8 +53,11 @@ template <typename T>
 Array<T>::Array(const Array &arrayToCopy) : size(arrayToCopy.size) {
 	last = arrayToCopy.last;
 	first = arrayToCopy.first;
+
+	/* Замість виділення пам'яті можна змінити його розмір */
 	elements.resize(arrayToCopy.size);
 
+	/* Пуш бек добавляє елемент в кінець вектора */
 	for (int ix = 0; ix < size; ix++)
 		elements.push_back(arrayToCopy.elements[ix]);
 }
@@ -93,6 +101,7 @@ void Array<T>::fill() {
 
 template <typename T>
 bool Array<T>::is_empty() {
+	/* У вектора є своя функція на перевірку чи він пустий */
 	return elements.empty();
 }
 
