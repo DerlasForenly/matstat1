@@ -127,6 +127,52 @@ calculate_t2.onclick = () => {
 calculate_t3.onclick = () => {
     let data = calculations_for_t1()
 
+    let mode = []
+    let most_popular_times = {
+        value: 0,
+        popularity: 0
+    }
+    for (let i = 0 ; i < data.length; i++) {
+        if (data[i][1] > most_popular_times['popularity'])
+            most_popular_times['value'] = data[i][0]
+            most_popular_times['popularity'] = data[i][1]
+        }
+    mode.push(most_popular_times)
+    for (let i = 0 ; i < data.length; i++)
+        if (data[i][1] == most_popular_times['popularity'] && 
+            most_popular_times['value'] != data[i][0]) {
+            mode.push({value: data[i][0], popularity: data[i][1]})
+        }
+
+    let sample = []
+    for (let i = 0; i < samples.length; i++) {
+        if (samples[i].value == "") continue 
+        sample = sum(sample, samples[i].value.split(' '))
+    }
+    for (let i = 0; i < sample.length; i++) {
+        sample[i] = sample[i].replace(',', '.')
+        sample[i] = parseFloat(sample[i])
+    }
+    sample.sort((a, b) => a - b)
+
+    let median
+    if (sample.length % 2 === 1)
+        median = sample[sample.length / 2 - 0.5]
+    else if (sample.length % 2 === 0)
+        median = (sample[sample.length / 2 - 1] + sample[sample.length / 2]) / 2.0
+    
+    let sample_mean = 0
+    for (let e of sample) {
+        sample_mean += e
+    }
+    sample_mean /= sample.length
+
+    let D = 0
+    for (let e of sample) {
+        D += (e - sample_mean) ** 2
+    }
+    D /= sample.length - 1
+
     let result = {
         median: 0,
         mode: 0,
@@ -140,6 +186,11 @@ calculate_t3.onclick = () => {
         variance_fixed: 0,
         corrected_standard_deviation: 0
     }
+    result['mode'] = mode;
+    result['median'] = median;
+    result['sample_mean'] = sample_mean;
+    result['sample_variance'] = D;
+    result['standart_derivation'] = Math.sqrt(D)
     
     render_result_t3(result)
 }

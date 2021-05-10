@@ -4,6 +4,8 @@ function entry(a, b) {
 }
 
 function sum(a, b) {
+    if (a == []) return [...b]
+    if (b == []) return [...a]
     let r = [...a]
     for (let e of b) r.push(e)
     return r
@@ -12,25 +14,6 @@ function sum(a, b) {
 function sum_without_dubles(a, b) {
     let r = [...a]
     for (let e of b) r.push(e)
-    return r.filter((value, index, arr) => arr.indexOf(value) === index)
-}
-
-function intersection(a, b) {
-    let r = [] 
-    for (let e of a) if (b.includes(e)) r.push(e)
-    return r.filter((value, index, arr) => arr.indexOf(value) === index)
-}
-
-function difference(a, b) {
-    let r = []
-    for (let e of a) if (!b.includes(e)) r.push(e)
-    return r.filter((value, index, arr) => arr.indexOf(value) === index)
-}
-
-function symmetric_difference(a, b) {
-    let r = []
-    for (let e of a) if (!b.includes(e)) r.push(e)
-    for (let e of b) if (!a.includes(e)) r.push(e)
     return r.filter((value, index, arr) => arr.indexOf(value) === index)
 }
 
@@ -53,6 +36,7 @@ function calculations_for_t1() {
     let s = 0
 
     for (let i = 0; i < samples.length; i++) {
+        if (samples[i].value == "") continue 
         sample = sum(sample, samples[i].value.split(' '))
     }
     for (let i = 0; i < sample.length; i++) {
