@@ -186,11 +186,12 @@ calculate_t3.onclick = () => {
         variance_fixed: 0,
         corrected_standard_deviation: 0
     }
-    result['mode'] = mode;
-    result['median'] = median;
-    result['sample_mean'] = sample_mean;
-    result['sample_variance'] = D;
-    result['standart_derivation'] = Math.sqrt(D)
+    result['mode'] = mode
+    result['median'] = median
+    result['sample_mean'] = sample_mean.toFixed(5)
+    result['sample_variance'] = D.toFixed(5)
+    result['standart_derivation'] = Math.sqrt(D).toFixed(5)
+    result['coefficient_of_variation'] = (Math.sqrt(D) / sample_mean).toFixed(5)
     
     render_result_t3(result)
 }
