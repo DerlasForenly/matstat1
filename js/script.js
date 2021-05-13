@@ -37,7 +37,7 @@ calculate_t2.onclick = () => {
     })
 
     let poligon = new Chart(document.getElementById('poligon').getContext('2d'), {
-        type: 'radar',
+        type: 'line',
         data: {
             labels,
             datasets: [{
@@ -128,19 +128,20 @@ calculate_t3.onclick = () => {
     let data = calculations_for_t1()
 
     let mode = []
-    let most_popular_times = {
-        value: 0,
-        popularity: 0
+    let most = {
+        value: data[0][0],
+        popularity: data[0][1]
     }
     for (let i = 0 ; i < data.length; i++) {
-        if (data[i][1] > most_popular_times['popularity'])
-            most_popular_times['value'] = data[i][0]
-            most_popular_times['popularity'] = data[i][1]
+        if (data[i][1] > most['popularity']) {
+            most['value'] = data[i][0]
+            most['popularity'] = data[i][1]
         }
-    mode.push(most_popular_times)
+    }
+    mode.push(most)
     for (let i = 0 ; i < data.length; i++)
-        if (data[i][1] == most_popular_times['popularity'] && 
-            most_popular_times['value'] != data[i][0]) {
+        if (data[i][1] == most['popularity'] && 
+        most['value'] != data[i][0]) {
             mode.push({value: data[i][0], popularity: data[i][1]})
         }
 
@@ -172,6 +173,31 @@ calculate_t3.onclick = () => {
         D += (e - sample_mean) ** 2
     }
     D /= sample.length - 1
+    
+    let cen3 = 0
+    for (let e of sample) {
+        cen3 += (e - sample_mean) ** 3
+    }
+    cen3 /= sample.length
+
+    let cen4 = 0
+    for (let e of sample) {
+        cen4 += (e - sample_mean) ** 4
+    }
+    cen4 /= sample.length
+
+    let asy = 0
+    for (let e of mode) {
+        asy += e['value']
+    }
+    asy /= mode.length
+    asy = (sample_mean - asy) / Math.sqrt(D)
+
+    let variance_fixed = 0
+    for (let i = 0; i < sample.length; i++) { 
+        variance_fixed += (sample[i] - sample_mean) ** 2
+    }
+    variance_fixed /= sample.length - 1
 
     let result = {
         median: 0,
@@ -180,7 +206,7 @@ calculate_t3.onclick = () => {
         sample_variance: 0,
         standart_derivation: 0,
         coefficient_of_variation: 0,
-        central_moments: 0,
+        central_moments: [0, 0],
         asymmetry: 0,
         excess: 0,
         variance_fixed: 0,
@@ -192,12 +218,20 @@ calculate_t3.onclick = () => {
     result['sample_variance'] = D.toFixed(5)
     result['standart_derivation'] = Math.sqrt(D).toFixed(5)
     result['coefficient_of_variation'] = (Math.sqrt(D) / sample_mean).toFixed(5)
+    result['central_moments'][0] = cen3
+    result['central_moments'][1] = cen4
+    result['asymmetry'] = asy
+    result['excess'] = (cen4 / (D * D)) - 3
+    result['variance_fixed'] = variance_fixed
+    result['corrected_standard_deviation'] = Math.sqrt(variance_fixed)
     
     render_result_t3(result)
 }
 
 calculate_t4.onclick = () => {
-    let result
+    let result = {
+        
+    }
 
     
     render_result_t4(result)
@@ -207,6 +241,7 @@ calculate_t5.onclick = () => {
     let result
 
     
+
     render_result_t5(result)
 }
 

@@ -68,11 +68,18 @@ function render_result_t3(result) {
     result_div_t3.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "Central moments 3, 4: " + result['central_moments']
+    label.textContent = "Central moment 3: " + result['central_moments'][0]
+    result_div_t3.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Central moment 4: " + result['central_moments'][1]
     result_div_t3.appendChild(label)
 
     label = document.createElement('label')
     label.textContent = "Asymmetry: " + result['asymmetry']
+    if (result['asymmetry'] <= 0.5 && result['asymmetry'] >= -0.5) {
+        
+    }
     result_div_t3.appendChild(label)
 
     label = document.createElement('label')
@@ -89,7 +96,32 @@ function render_result_t3(result) {
 }
 
 function render_result_t4(result) {
-    
+    deleteChilds(result_div_t4)
+
+    let label = document.createElement('label')
+    label.textContent = "Sample mean: " + result['sample_mean']
+    result_div_t4.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Sample mean: " + result['sample_mean']
+    result_div_t4.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Sample mean: " + result['sample_mean']
+    result_div_t4.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Sample mean: " + result['sample_mean']
+    result_div_t4.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Sample mean: " + result['sample_mean']
+    result_div_t4.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Sample mean: " + result['sample_mean']
+    result_div_t4.appendChild(label)
+
 }
 
 function render_result_t5(result) {
