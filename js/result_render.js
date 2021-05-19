@@ -1,5 +1,5 @@
 function render_result_t1(result) {
-    deleteChilds(result_div_t1)
+    clear_all.onclick()
 
     let headers = [
         "Sample",
@@ -34,11 +34,11 @@ function render_result_t1(result) {
 }
 
 function render_result_t2(result) {
-    
+    //clear_all.onclick()
 }
 
 function render_result_t3(result) {
-    deleteChilds(result_div_t3)
+    clear_all.onclick()
 
     let label = document.createElement('label')
     label.textContent = "Sample mean: " + result['sample_mean']
@@ -96,34 +96,61 @@ function render_result_t3(result) {
 }
 
 function render_result_t4(result) {
-    deleteChilds(result_div_t4)
+    clear_all.onclick()
 
-    let label = document.createElement('label')
-    label.textContent = "Sample mean: " + result['sample_mean']
+    let label = document.createElement('h3')
+    label.textContent = "By the method of moments: "
     result_div_t4.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "Sample mean: " + result['sample_mean']
+    label.textContent = "Expected value: " + result['M1']
     result_div_t4.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "Sample mean: " + result['sample_mean']
+    label.textContent = "Variance: " + result['D1']
     result_div_t4.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "Sample mean: " + result['sample_mean']
+    label.textContent = "Standart derivation: " + result['sig1']
+    result_div_t4.appendChild(label)
+
+    label = document.createElement('h3')
+    label.textContent = "By the method of largest similarity: "
     result_div_t4.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "Sample mean: " + result['sample_mean']
+    label.textContent = "Expected value: " + result['M2']
     result_div_t4.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "Sample mean: " + result['sample_mean']
+    label.textContent = "Variance: " + result['D2']
     result_div_t4.appendChild(label)
 
+    label = document.createElement('label')
+    label.textContent = "Standart derivation: " + result['sig2']
+    result_div_t4.appendChild(label)
 }
 
 function render_result_t5(result) {
-    
+    clear_all.onclick()
+
+    let label = document.createElement('label')
+    label.textContent = "Expected value: " + result['m']
+    result_div_t5.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Variance: " + result['d']
+    result_div_t5.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "s " + result['s']
+    result_div_t5.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "s2: " + result['s2']
+    result_div_t5.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "t: " + result['t']
+    result_div_t5.appendChild(label)
 }

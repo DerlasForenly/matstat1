@@ -45,7 +45,7 @@ function start_render() {
         div.setAttribute('class', "input_row")
 
         let label = document.createElement('label')
-        label.textContent = `Sample ${i}:`
+        label.textContent = `Sample:`
 
         let input = document.createElement('input')
         input.setAttribute('type', "text")
@@ -58,7 +58,7 @@ function start_render() {
     }
     samples = document.getElementsByClassName('sample_input')
     samples[0].value = A
-    samples[1].value = B
+    //samples[1].value = B
 }
 
 start_render()

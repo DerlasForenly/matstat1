@@ -3,7 +3,7 @@ calculate_t1.onclick = () => {
 }
 
 calculate_t2.onclick = () => {
-    deleteChilds(result_div_t2)
+    clear_all.onclick()
     let result = calculations_for_t1()
     let data = []
     let labels = []
@@ -178,13 +178,13 @@ calculate_t3.onclick = () => {
     for (let e of sample) {
         cen3 += (e - sample_mean) ** 3
     }
-    cen3 /= sample.length
+    cen3 /= sample.length - 1
 
     let cen4 = 0
     for (let e of sample) {
         cen4 += (e - sample_mean) ** 4
     }
-    cen4 /= sample.length
+    cen4 /= sample.length - 1
 
     let asy = 0
     for (let e of mode) {
@@ -229,8 +229,40 @@ calculate_t3.onclick = () => {
 }
 
 calculate_t4.onclick = () => {
+    let data = calculations_for_t1()
+
+    let sample = []
+    for (let i = 0; i < samples.length; i++) {
+        if (samples[i].value == "") continue 
+        sample = sum(sample, samples[i].value.split(' '))
+    }
+    for (let i = 0; i < sample.length; i++) {
+        sample[i] = sample[i].replace(',', '.')
+        sample[i] = parseFloat(sample[i])
+    }
+    sample.sort((a, b) => a - b)
+
+    let m1 = 0
+    for (let i = 0; i < data.length; i++) {
+        m1 += data[i][0] * data[i][1]
+    }
+    m1 /= sample.length
+
+    let d1 = 0
+    for (let i = 0; i < data.length; i++) {
+        d1 += data[i][0] * data[i][0] * data[i][1]
+    }
+    d1 /= sample.length
+    d1 -= m1 ** 2
+
+
     let result = {
-        
+        M1: m1.toFixed(3),
+        D1: d1.toFixed(3),
+        sig1: Math.sqrt(d1).toFixed(3),
+        M2: m1.toFixed(5),
+        D2: d1.toFixed(5),
+        sig2: Math.sqrt(d1).toFixed(5)
     }
 
     
@@ -238,7 +270,58 @@ calculate_t4.onclick = () => {
 }
 
 calculate_t5.onclick = () => {
-    let result
+    function normalcdf(mean, sigma, to) {
+        var z = (to-mean)/Math.sqrt(2*sigma*sigma);
+        var t = 1/(1+0.3275911*Math.abs(z));
+        var a1 =  0.254829592;
+        var a2 = -0.284496736;
+        var a3 =  1.421413741;
+        var a4 = -1.453152027;
+        var a5 =  1.061405429;
+        var erf = 1-(((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*Math.exp(-z*z);
+        var sign = 1;
+        if(z < 0)
+        {
+            sign = -1;
+        }
+        return (1/2)*(1+sign*erf);
+    }
+
+    let data = calculations_for_t1()
+
+    let n = 0
+
+    let m = 0
+    for (let i = 0; i < data.length; i++) {
+        m += data[i][0] * data[i][1]
+        n += data[i][1]
+    }
+    m /= n
+
+    let d = 0
+    for (let i = 0; i < data.length; i++) {
+        d += ((data[i][0] - m) ** 2) * data[i][1]
+    }
+    d /= n
+
+    let s2 = n / (n - 1) * d
+    let s = Math.sqrt(s2)
+
+    // let t = []
+    // for (let i = 0; i < data.length; i++) {
+    //     t.push(normalcdf(data[i][0], m, d))
+    // }
+
+    let t = (m - 0.05) / (Math.sqrt(d) / Math.sqrt(n))
+    
+
+    let result = {
+        m: m.toFixed(5),
+        d: d.toFixed(5),
+        s2: s2.toFixed(5),
+        s: s.toFixed(5),
+        t: t
+    }
 
     
 
@@ -253,7 +336,7 @@ clear_all.onclick = () => {
     deleteChilds(result_div_t5)
 
     for (let i = 0; i < samples.length; i++) {
-        samples[i].value = ""
+        //samples[i].value = ""
     }
 }
 
