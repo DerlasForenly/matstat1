@@ -135,22 +135,26 @@ function render_result_t5(result) {
     clear_all.onclick()
 
     let label = document.createElement('label')
-    label.textContent = "Expected value: " + result['m']
+    label.textContent = "Expected value (down): " + result['m_down']
     result_div_t5.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "Variance: " + result['d']
+    label.textContent = "Expected value (center): " + result['m']
     result_div_t5.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "s " + result['s']
+    label.textContent = "Expected value (upper): " + result['m_up']
     result_div_t5.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "s2: " + result['s2']
+    label.textContent = "Standart derivation (down): " + result['d_down']
     result_div_t5.appendChild(label)
 
     label = document.createElement('label')
-    label.textContent = "t: " + result['t']
+    label.textContent = "Standart derivation (center): " + result['d']
+    result_div_t5.appendChild(label)
+
+    label = document.createElement('label')
+    label.textContent = "Standart derivation (upper): " + result['d_up']
     result_div_t5.appendChild(label)
 }

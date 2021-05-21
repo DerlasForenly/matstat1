@@ -306,21 +306,41 @@ calculate_t5.onclick = () => {
 
     let s2 = n / (n - 1) * d
     let s = Math.sqrt(s2)
+    
+    function get_zScore(p) {
+        if (p > 1) {
+            p *= 0.01
+        }
+        if (p < 0.5) {
+            return -1 * zScore(1 - p)
+        }
+        if (p > 0.92) {
+            if (p === 1) {
+                return Infinity
+            }
+    
+            const temp = Math.sqrt(-1 * Math.log(1 - p))
+            
+            return (((2.3212128 * temp + 4.8501413) * temp - 2.2979648) * temp - 2.7871893) / ((1.6370678 * temp + 3.5438892) * temp + 1)
+        }
+    
+        p -= 0.5
+    
+        const temp = Math.pow(p, 2)
+    
+        return p * (((-25.4410605 * temp + 41.3911977) * temp - 18.6150006) * temp + 2.5066282) / ((((3.1308291 * temp - 21.0622410) * temp + 23.0833674) * temp - 8.4735109) * temp + 1)
+    }
 
-    // let t = []
-    // for (let i = 0; i < data.length; i++) {
-    //     t.push(normalcdf(data[i][0], m, d))
-    // }
-
-    let t = (m - 0.05) / (Math.sqrt(d) / Math.sqrt(n))
+    let t = get_zScore(0.95)
     
 
     let result = {
         m: m.toFixed(5),
+        m_down: m - (t * s / Math.sqrt(n)),
+        m_up: m + (t * s / Math.sqrt(n)),
         d: d.toFixed(5),
-        s2: s2.toFixed(5),
-        s: s.toFixed(5),
-        t: t
+        d_down: d - (t * s / Math.sqrt(n)),
+        d_up: d + (t * s / Math.sqrt(n))
     }
 
     
@@ -343,4 +363,30 @@ clear_all.onclick = () => {
 set_default.onclick = () => {
     clear_all.onclick()
     start_render()
+}
+
+
+
+function get_zScore(p) {
+    if (p > 1) {
+        p *= 0.01
+    }
+    if (p < 0.5) {
+        return -1 * zScore(1 - p)
+    }
+    if (p > 0.92) {
+        if (p === 1) {
+            return Infinity
+        }
+
+        const temp = Math.sqrt(-1 * Math.log(1 - p))
+        
+        return (((2.3212128 * temp + 4.8501413) * temp - 2.2979648) * temp - 2.7871893) / ((1.6370678 * temp + 3.5438892) * temp + 1)
+    }
+
+    p -= 0.5
+
+    const temp = Math.pow(p, 2)
+
+    return p * (((-25.4410605 * temp + 41.3911977) * temp - 18.6150006) * temp + 2.5066282) / ((((3.1308291 * temp - 21.0622410) * temp + 23.0833674) * temp - 8.4735109) * temp + 1)
 }
